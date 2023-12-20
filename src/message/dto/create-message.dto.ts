@@ -7,4 +7,7 @@ export class CreateMessageDto {
 
   @IsString()
   readonly sender: string;
+
+  @IsString()
+  readonly name: string;
 }
