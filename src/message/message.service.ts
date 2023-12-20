@@ -17,4 +17,8 @@ export class MessageService {
   async getMessage(): Promise<Message[]> {
     return this.messageModel.find().exec();
   }
+
+  async getMessageById(id: string): Promise<Message> {
+    return this.messageModel.findById(id).exec();
+  }
 }

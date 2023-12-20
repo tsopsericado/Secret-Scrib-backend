@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MessageModule } from './message/message.module';
+import { BucketModule } from './bucket/bucket.module';
 
 @Module({
   imports: [
@@ -15,8 +16,13 @@ import { MessageModule } from './message/message.module';
     MongooseModule.forRoot(process.env.MONGODB_URI),
     AuthModule,
     MessageModule,
+    BucketModule,
   ],
-  controllers: [AppController],
+  controllers: [
+    // BucketController,
+    // MessageController,
+    AppController,
+  ],
   providers: [AppService],
 })
 export class AppModule {}
