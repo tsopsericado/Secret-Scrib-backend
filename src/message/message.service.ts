@@ -9,8 +9,8 @@ export class MessageService {
     @InjectModel(Message.name) private messageModel: Model<Message>,
   ) {}
 
-  async createMessage(content: string, sender: string): Promise<Message> {
-    const message = new this.messageModel({ content, sender });
+  async createMessage(content: string, bucket_id: string): Promise<Message> {
+    const message = new this.messageModel({ content, bucket_id });
     return message.save();
   }
 
@@ -18,7 +18,8 @@ export class MessageService {
     return this.messageModel.find().exec();
   }
 
-  async getMessageById(id: string): Promise<Message> {
-    return this.messageModel.findById(id).exec();
+  async getMessageById(id: string): Promise<any> {
+    console.log('message', id);
+    return this.messageModel.find({ bucket_id: id });
   }
 }

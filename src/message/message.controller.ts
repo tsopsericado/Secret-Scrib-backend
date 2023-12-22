@@ -6,8 +6,8 @@ export class MessageController {
   constructor(private readonly messageService: MessageService) {}
 
   @Post()
-  async createMessage(@Body() { content, sender }) {
-    const message = await this.messageService.createMessage(content, sender);
+  async createMessage(@Body() { content, bucket_id }) {
+    const message = await this.messageService.createMessage(content, bucket_id);
     return { message };
   }
 
@@ -19,7 +19,7 @@ export class MessageController {
 
   @Get(':id')
   async getMessageById(@Param('id') id: string) {
-    const message = this.messageService.getMessageById(id);
+    const message = await this.messageService.getMessageById(id);
     return { message };
   }
 }

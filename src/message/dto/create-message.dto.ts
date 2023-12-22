@@ -6,8 +6,5 @@ export class CreateMessageDto {
   readonly content: string;
 
   @IsString()
-  readonly sender: string;
-
-  @IsString()
-  readonly name: string;
+  readonly bucket_id: string;
 }

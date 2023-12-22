@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document, HydratedDocument } from 'mongoose';
+import { User } from 'src/auth/schema/user.schema';
 import { Message } from 'src/message/schema/message.schema';
 
 export type BucketDocument = HydratedDocument<Bucket>;
@@ -10,7 +11,7 @@ export class Bucket extends Document {
   title: string;
 
   @Prop({ required: true })
-  creator: string;
+  creator: User;
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }] })
   message_ids: Message;
