@@ -2,13 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Bucket } from './schema/bucket.schema';
 import { Model } from 'mongoose';
+import { User } from 'src/auth/schema/user.schema';
 
 @Injectable()
 export class BucketService {
-  constructor(@InjectModel(Bucket.name) private bucketModel: Model<Bucket>) {}
+  constructor(@InjectModel(Bucket.name) private bucketModel: Model<Bucket>) { }
 
-  async createBucket(title: string, creator: string): Promise<Bucket> {
+  async createBucket(title: string, creator: User): Promise<Bucket> {
     const bucket = new this.bucketModel({ title, creator });
+    console.log({ bucket, creator })
     return bucket.save();
   }
 

@@ -14,7 +14,7 @@ export class AuthService {
     @InjectModel(User.name)
     private userModel: Model<User>,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async signUp(signUpDto: signUpDto): Promise<{ token: string }> {
     const { name, email, password } = signUpDto;
@@ -26,6 +26,8 @@ export class AuthService {
       email,
       password: hashedPassword,
     });
+
+    console.log({ user })
 
     const token = this.jwtService.sign({ id: user._id });
 

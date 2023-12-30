@@ -3,7 +3,7 @@ import { BucketService } from './bucket.service';
 
 @Controller('bucket')
 export class BucketController {
-  constructor(private readonly bucketService: BucketService) {}
+  constructor(private readonly bucketService: BucketService) { }
 
   @Post()
   async createBucket(@Body() { title, creator }) {

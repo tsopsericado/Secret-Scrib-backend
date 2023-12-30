@@ -7,7 +7,7 @@ export type BucketDocument = HydratedDocument<Bucket>;
 
 @Schema()
 export class Bucket extends Document {
-  @Prop({ required: true })
+  @Prop({ required: true }) 
   title: string;
 
   @Prop({ required: true })
