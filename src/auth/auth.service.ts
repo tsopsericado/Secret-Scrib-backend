@@ -16,41 +16,52 @@ export class AuthService {
     private jwtService: JwtService,
   ) { }
 
-  async signUp(signUpDto: signUpDto): Promise<{ token: string }> {
+  async signUp(signUpDto: signUpDto): Promise<{ token: string, user: Omit<User, 'password'> }> {
     const { name, email, password } = signUpDto;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await this.userModel.create({
+    const { password: T, ...user } = await this.userModel.create({ // T is an alias to password.
       name,
       email,
       password: hashedPassword,
-    });
+    }).then((res: any) => res?._doc || res);
 
-    console.log({ user })
+    console.log({ user });
 
-    const token = this.jwtService.sign({ id: user._id });
+    const token = this.jwtService.sign({ ...user });
 
-    return { token };
+    return { user, token };
   }
 
-  async login(LoginDto: LoginDto): Promise<{ token: string }> {
+  async login(LoginDto: LoginDto): Promise<{ token: string, user: Omit<User, 'password'> }> {
     const { email, password } = LoginDto;
 
-    const user = await this.userModel.findOne({ email });
+    const user_res = await this.userModel.findOne({
+      email
+    }).then((res: any) => res?._doc || res);
 
-    if (!user) {
+    if (!user_res) {
       throw new UnauthorizedException('Invalid email or password');
     }
 
-    const isPasswordmatched = await bcrypt.compare(password, user.password);
+    const isPasswordmatched = await bcrypt.compare(password, user_res.password);
 
     if (!isPasswordmatched) {
       throw new UnauthorizedException('Invalid email or password');
     }
 
+    const { password: T, ...user } = user_res;
+
     const token = this.jwtService.sign({ id: user._id });
 
-    return { token };
+    return { token, user };
+  }
+
+  async currentUser(token: string): Promise<{ user: Omit<User, 'password'> }> {
+
+    const user = this.jwtService.verify<Omit<User, 'password'>>(token);
+
+    return { user };
   }
 }

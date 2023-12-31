@@ -23,8 +23,9 @@ export class BucketController {
     return this.bucketService.getBuckets();
   }
 
-  @Get('id')
+  @Get('/:id')
   async getBucketById(@Param('id') id: string) {
     return this.bucketService.getBucketById(id);
   }
+
 }
