@@ -3,7 +3,7 @@ import { MessageService } from './message.service';
 
 @Controller('message')
 export class MessageController {
-  constructor(private readonly messageService: MessageService) {}
+  constructor(private readonly messageService: MessageService) { }
 
   @Post()
   async createMessage(@Body() { content, bucket_id }) {
@@ -21,5 +21,11 @@ export class MessageController {
   async getMessageById(@Param('id') id: string) {
     const message = await this.messageService.getMessageById(id);
     return { message };
+  }
+
+  @Get('/bucket/:bucket_id')
+  async getMessageByBucketId(@Param('bucket_id') bucket_id: string) {
+    const messages = await this.messageService.getMessageByBucketId(bucket_id);
+    return { messages };
   }
 }
