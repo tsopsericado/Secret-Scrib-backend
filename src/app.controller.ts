@@ -9,9 +9,9 @@ export class AppController {
 
   @Get()
   @UseGuards(AuthGuard('google'))
-  async googleAuth(@Req() Req) { }
+  async googleAuth(@Req() req) { }
 
-  @Get('/profile')
+  @Get('auth/google/callback')
   @UseGuards(AuthGuard('google'))
   googleAuthRedirect(@Req() req) {
     return this.appService.googleLogin(req)
