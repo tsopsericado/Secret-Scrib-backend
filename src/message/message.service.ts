@@ -20,7 +20,6 @@ export class MessageService {
   }
 
   async getMessageById(id: string): Promise<any> {
-    console.log('message', id);
     return this.messageModel.findById(id);
   }
 

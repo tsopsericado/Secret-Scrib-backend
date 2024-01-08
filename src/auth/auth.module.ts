@@ -18,7 +18,8 @@ import { ConfigService } from '@nestjs/config';
           secret: config.get<string>('JWT_SECRET'),
           signOptions: {
             expiresIn: config.get<string | number>('JWT_EXPIRES'),
-          }
+          },
+          global: true,
         };
       },
     }),
@@ -28,4 +29,4 @@ import { ConfigService } from '@nestjs/config';
   controllers: [AuthController],
   providers: [AuthService],
 })
-export class AuthModule {}
+export class AuthModule { }

@@ -6,8 +6,8 @@ export class BucketController {
   constructor(private readonly bucketService: BucketService) { }
 
   @Post()
-  async createBucket(@Body() { title, creator }) {
-    return this.bucketService.createBucket(title, creator);
+  async createBucket(@Body() { title, creator_id }) {
+    return this.bucketService.createBucket(title, creator_id);
   }
 
   @Post(':bucketId/messages/:messageId')
@@ -27,5 +27,23 @@ export class BucketController {
   async getBucketById(@Param('id') id: string) {
     return this.bucketService.getBucketById(id);
   }
+
+  @Get('/user/:user_id')
+  async getUserBuckets(@Param('user_id') user_id: string) {
+    const user_buckets = await this.bucketService.getUserBuckets(user_id);
+
+    return { buckets: user_buckets };
+  }
+
+  // @Post()
+  // async createBucket(@Body() { title, creator_id }) {
+  //   try {
+  //     const bucket = await this.bucketService.createBucket(title, creator_id);
+  //     return { bucket }
+  //   } catch (error) {
+  //     throw new UnauthorizedException(error)
+  //   }
+  // }
+
 
 }

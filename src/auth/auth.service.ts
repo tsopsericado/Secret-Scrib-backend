@@ -27,8 +27,6 @@ export class AuthService {
       password: hashedPassword,
     }).then((res: any) => res?._doc || res);
 
-    console.log({ user });
-
     const token = this.jwtService.sign({ ...user });
 
     return { user, token };
