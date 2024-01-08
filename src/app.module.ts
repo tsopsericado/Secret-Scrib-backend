@@ -6,7 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MessageModule } from './message/message.module';
 import { BucketModule } from './bucket/bucket.module';
-import { GoogleStrategy } from './google.strategy';
+// import { GoogleStrategy } from './google.strategy';
 
 @Module({
   imports: [
@@ -24,6 +24,6 @@ import { GoogleStrategy } from './google.strategy';
     // MessageController,
     AppController,
   ],
-  providers: [AppService, GoogleStrategy],
+  providers: [AppService],
 })
 export class AppModule { }
