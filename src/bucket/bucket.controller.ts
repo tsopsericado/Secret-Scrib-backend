@@ -35,5 +35,15 @@ export class BucketController {
     return { buckets: user_buckets };
   }
 
+  // @Post()
+  // async createBucket(@Body() { title, creator_id }) {
+  //   try {
+  //     const bucket = await this.bucketService.createBucket(title, creator_id);
+  //     return { bucket }
+  //   } catch (error) {
+  //     throw new UnauthorizedException(error)
+  //   }
+  // }
+
 
 }
