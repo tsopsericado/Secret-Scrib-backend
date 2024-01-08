@@ -9,7 +9,7 @@ async function bootstrap() {
   dotenv.config();
   const app = await NestFactory.create(AppModule);
   var cors = require('cors')
-  app.enableCors()
+  app.enableCors(cors())
 
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(PORT).then(() => console.log(`\nserver running on port ${PORT}`));
