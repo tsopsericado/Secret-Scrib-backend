@@ -3,6 +3,12 @@ import { AuthService } from './auth.service';
 import { signUpDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
 import { User } from './schema/user.schema';
+import { OAuth2Client } from 'google-auth-library';
+
+const client = new OAuth2Client(
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_SECRET
+);
 
 @Controller('auth')
 export class AuthController {
